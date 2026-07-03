@@ -1,3 +1,52 @@
+// ===== Paywall: 1 free article, then locked =====
+(function articlePaywall() {
+  const articleEl = document.querySelector('.article-wrap');
+  if (!articleEl) return; // only applies to post pages
+
+  const slug = location.pathname.split('/').pop();
+  let read = [];
+  try { read = JSON.parse(localStorage.getItem('bi_read_articles') || '[]'); } catch (e) { read = []; }
+
+  if (read.includes(slug)) return; // already unlocked this one this browser
+
+  if (read.length === 0) {
+    read.push(slug);
+    localStorage.setItem('bi_read_articles', JSON.stringify(read));
+    return; // first free article — let it through
+  }
+
+  document.body.classList.add('paywalled');
+  const overlay = document.createElement('div');
+  overlay.className = 'paywall-overlay';
+  overlay.innerHTML =
+    '<div class="paywall-card">' +
+      '<div class="paywall-icon">🔒</div>' +
+      '<h3>You\'ve read your free story</h3>' +
+      '<p>Subscribe to Blog India for unlimited access to every story on India, health, and geopolitics.</p>' +
+      '<a href="https://rzp.io/rzp/pjFsVCZw" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Subscribe to Keep Reading</a>' +
+      '<a href="../blog.html" class="paywall-back">← Back to all stories</a>' +
+    '</div>';
+  document.body.appendChild(overlay);
+})();
+
+// ===== 60-second subscribe nudge (site-wide) =====
+(function subscribeNudge() {
+  if (sessionStorage.getItem('bi_nudge_shown')) return;
+  setTimeout(() => {
+    if (sessionStorage.getItem('bi_nudge_shown') || document.querySelector('.paywall-overlay')) return;
+    sessionStorage.setItem('bi_nudge_shown', '1');
+    const nudge = document.createElement('div');
+    nudge.className = 'nudge-popup';
+    nudge.innerHTML =
+      '<button class="nudge-close" aria-label="Close">&times;</button>' +
+      '<p class="nudge-title">👋 Enjoying Blog India?</p>' +
+      '<p class="nudge-text">Subscribe to support independent journalism on India, health, and geopolitics.</p>' +
+      '<a href="https://rzp.io/rzp/pjFsVCZw" target="_blank" rel="noopener noreferrer" class="btn btn-primary nudge-btn">Subscribe Now</a>';
+    document.body.appendChild(nudge);
+    nudge.querySelector('.nudge-close').addEventListener('click', () => nudge.remove());
+  }, 60000);
+})();
+
 // ===== Theme toggle =====
 (function initTheme() {
   const saved = localStorage.getItem('bi-theme');

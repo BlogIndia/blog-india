@@ -711,6 +711,60 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .form-field input:focus, .form-field textarea:focus { outline: none; border-color: var(--saffron); }
 .form-msg { margin-top: 14px; font-weight: 700; color: var(--green-dark); display: none; }
 
+/* ---------- PAYWALL ---------- */
+.paywalled .article-wrap,
+.paywalled .related-grid {
+  filter: blur(8px);
+  pointer-events: none;
+  user-select: none;
+}
+.paywall-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(16, 26, 52, 0.75);
+  backdrop-filter: blur(4px);
+  display: grid;
+  place-items: center;
+  z-index: 1000;
+  padding: 24px;
+}
+.paywall-card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 48px 40px;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5);
+}
+.paywall-icon { font-size: 2.6rem; margin-bottom: 14px; }
+.paywall-card h3 { font-family: var(--ff-serif); font-size: 1.5rem; margin-bottom: 12px; }
+.paywall-card p { color: var(--muted); margin-bottom: 24px; line-height: 1.6; }
+.paywall-card .btn { width: 100%; justify-content: center; margin-bottom: 16px; }
+.paywall-back { display: block; font-size: 0.88rem; color: var(--muted); font-weight: 600; }
+.paywall-back:hover { color: var(--saffron-dark); }
+
+.nudge-popup {
+  position: fixed;
+  bottom: 24px; left: 24px;
+  max-width: 320px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 22px;
+  box-shadow: 0 24px 50px -18px var(--shadow);
+  z-index: 900;
+  animation: nudgeIn 0.4s ease;
+}
+@keyframes nudgeIn { from { opacity:0; transform: translateY(20px);} to {opacity:1; transform: translateY(0);} }
+.nudge-close {
+  position: absolute; top: 10px; right: 12px;
+  font-size: 1.2rem; color: var(--muted); line-height: 1;
+}
+.nudge-close:hover { color: var(--ink); }
+.nudge-title { font-weight: 800; margin-bottom: 6px; font-family: var(--ff-serif); font-size: 1.05rem; }
+.nudge-text { font-size: 0.86rem; color: var(--muted); margin-bottom: 14px; line-height: 1.5; }
+.nudge-btn { width: 100%; justify-content: center; padding: 10px 20px; font-size: 0.85rem; }
+
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 980px) {
   .hero-grid { grid-template-columns: 1fr; }
