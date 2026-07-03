@@ -32,6 +32,15 @@
 // ===== 60-second subscribe nudge (site-wide) =====
 (function subscribeNudge() {
   if (sessionStorage.getItem('bi_nudge_shown')) return;
+
+  let startedAt = sessionStorage.getItem('bi_session_start');
+  if (!startedAt) {
+    startedAt = Date.now().toString();
+    sessionStorage.setItem('bi_session_start', startedAt);
+  }
+  const elapsed = Date.now() - parseInt(startedAt, 10);
+  const remaining = Math.max(0, 60000 - elapsed);
+
   setTimeout(() => {
     if (sessionStorage.getItem('bi_nudge_shown') || document.querySelector('.paywall-overlay')) return;
     sessionStorage.setItem('bi_nudge_shown', '1');
@@ -44,7 +53,7 @@
       '<a href="https://rzp.io/rzp/pjFsVCZw" target="_blank" rel="noopener noreferrer" class="btn btn-primary nudge-btn">Subscribe Now</a>';
     document.body.appendChild(nudge);
     nudge.querySelector('.nudge-close').addEventListener('click', () => nudge.remove());
-  }, 60000);
+  }, remaining);
 })();
 
 // ===== Theme toggle =====
