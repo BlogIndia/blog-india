@@ -51,6 +51,26 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://blogindia.github.io/blog-india/posts/2026-07-06-skyroot-vikram1-launch.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://blogindia.github.io/blog-india/posts/2026-07-06-ultrasound-oral-cancer.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://blogindia.github.io/blog-india/posts/2026-07-06-indus-waters-treaty-crisis.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://blogindia.github.io/blog-india/posts/2026-07-06-bumblebee-problem-solving.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://blogindia.github.io/blog-india/privacy.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
